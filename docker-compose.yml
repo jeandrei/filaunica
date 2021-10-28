@@ -42,7 +42,7 @@ services:
       - "443:443"
     volumes:
       #/www local no host onde vamos montar a pasta /var/www/html do container
-      - /www/filaunica:/var/www/html
+      - /www/filaunica:/var/www/html/filaunica
     links:
       #linka ou seja permite comunicação com o container abaixo db
       - db
