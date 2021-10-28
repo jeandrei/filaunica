@@ -266,6 +266,8 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                             ?>                      
                     </div>                   
                 </div>
+                
+                <hr>
 
                 <div class="row">
                     <div class="col-sm-12">Última informação do histórico: <?php echo $registro['ultimo_historico']; ?></div>
