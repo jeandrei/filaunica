@@ -28,6 +28,58 @@ jQuery.validator.addMethod("cpf", function(value, element) {
 
 }, "CPF inválido");
 
+/* para usar a função de validação de email basta colocar na classe email */
+jQuery.validator.addMethod("email", 
+    function(value, element) {
+		//se quiser tornar opcional a validação coloque esse if sempre antes da validação
+		if (this.optional(element)) {
+			return true;
+		}
+
+        return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+    }, 
+    "Email inválido"
+);
+
+/* para usar a função de validação de celular basta colocar na classe validacelular */
+jQuery.validator.addMethod('validacelular', function (value, element) {
+    value = value.replace("(","");
+    value = value.replace(")", "");
+    value = value.replace("-", "");
+    value = value.replace(" ", "").trim();
+    if (value == '0000000000') {
+        return (this.optional(element) || false);
+    } else if (value == '00000000000') {
+        return (this.optional(element) || false);
+    }
+    if (["00", "01", "02", "03", , "04", , "05", , "06", , "07", , "08", "09", "10"]
+    .indexOf(value.substring(0, 2)) != -1) {
+        return (this.optional(element) || false);
+    }
+    if (value.length < 10 || value.length > 11) {
+        return (this.optional(element) || false);
+    }
+    if (["6", "7", "8", "9"].indexOf(value.substring(2, 3)) == -1) {
+        return (this.optional(element) || false);
+    }
+    return (this.optional(element) || true);
+}, 'Celular válido!');
+
+
+
+
+/* para usar a função de validação de email basta colocar na classe email */
+jQuery.validator.addMethod("validatel", 
+    function(value, element) {
+		//se quiser tornar opcional a validação coloque esse if sempre antes da validação
+		if (this.optional(element)) {
+			return true;
+		}
+
+        return /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/.test(value);
+    }, 
+    "Email inválido"
+);
 
 
 

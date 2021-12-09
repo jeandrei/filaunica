@@ -103,7 +103,7 @@
                                     type="text" 
                                     name="email" 
                                     id="email" 
-                                    class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
+                                    class="form-control email <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['email']); ?>"
                                 >
                                 <span class="invalid-feedback">
@@ -127,7 +127,7 @@
                                     name="celular" 
                                     id="celular" 
                                     maxlength="15"
-                                    class="form-control celular <?php echo (!empty($data['celular_err'])) ? 'is-invalid' : ''; ?>"
+                                    class="form-control celular validacelular <?php echo (!empty($data['celular_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['celular']); ?>"
                                 >
                                 <span class="invalid-feedback">
@@ -146,7 +146,7 @@
                                     name="telefone" 
                                     id="telefone" 
                                     maxlength="15"
-                                    class="form-control telefone <?php echo (!empty($data['telefone_err'])) ? 'is-invalid' : ''; ?>"
+                                    class="form-control telefone validatel<?php echo (!empty($data['telefone_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['telefone']); ?>"
                                 >
                                 <span class="invalid-feedback">
