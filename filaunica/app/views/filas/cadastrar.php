@@ -42,6 +42,18 @@
     <!-- ===================FORMULÁRIO DE CADASTRO========================== -->   
     <div class="container mt-3" style="background-color:#FFFAF0">
     <form id="cadastrar" action="<?php echo URLROOT; ?>/filas/cadastrar" method="post" enctype="multipart/form-data">
+        
+        
+          
+            <?php
+            $rand=rand();
+            $_SESSION['rand']=$rand;
+            ?>
+            <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
+            
+
+    
+    
         <!-- ===============LINHA PARA TODO O CONTEÚDO============== -->
         <div class="row">
             
@@ -335,7 +347,7 @@
                                 <div class="checkbox checkbox-primary checkbox-inline">
                                 <input id="portador" type="checkbox" name="portador" value="1" >
                                 <label for="portador">
-                                    <strong>Criança com deficiência ?</strong>
+                                    <strong>Criança com necessidades especiais?</strong>
                                 </label>
                             </div>
                             <!-- DEFICIÊNCIA -->                           

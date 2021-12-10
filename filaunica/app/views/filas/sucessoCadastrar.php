@@ -38,8 +38,13 @@
     <div class="bloco" style="margin-top:20px;">
         
         <div class="row">
-
-           
+            
+            <div class="col text-center" style="color:green; font-size:25px">
+                Nome da Criança: <?php echo $data['nome']; ?>
+            </div> 
+        </div>
+        
+        <div class="row">
             <div class="col text-center" style="color:green; font-size:25px">
                 Etapa: <?php echo $data['desc_etapa']->descricao; ?>
             </div> 

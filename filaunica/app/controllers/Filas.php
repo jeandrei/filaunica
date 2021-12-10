@@ -21,8 +21,18 @@
                        
 
             // Check for POST            
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Process form
+                
+                //verifico se a session protocolo tem algum valor
+                //se sim o formulário já foi enviado e redireciono para
+                //um novo cadastro caso contrário lá no else
+                //eu dou um unset na session protocolo para 
+                //permitir que seja enviado o formulário
+                if(isset($_SESSION['protocolo']))
+                {
+                    redirect('filas/cadastrar');
+                }
 
                 // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -186,6 +196,12 @@
                 
                 $data['protocolo'] = $this->filaModel->generateProtocol();
                 
+                //para evitar o reenvio ao enviar a primeira vez
+                //defino a sessão session protocolo
+                //para lá em cima se ela estiver com valor
+                //evito o reenvio do formulário
+                $_SESSION['protocolo'] =  $data['protocolo'];
+
                 if($data['unidade1'] = $this->filaModel->getEscolasById($data['opcao1']))
                 {
                     $data['unidade1'] = $this->filaModel->getEscolasById($data['opcao1']);    
@@ -208,7 +224,7 @@
                 //busco a posição que ficou na fila
                 $data['posicao'] = $this->filaModel->buscaPosicaoFila($data['protocolo']);
                
-
+               
                 //pego o id da etapa a partir da data de nascimento
                 // SE QUISER RESTRINGIR PARA ACEITAR COM O MÍNIMO DE 4 MESES TEM QUE IR NO ARQUIVO
                 /// models/Etapa.php e na função getEtapa habilitar as linhas que fazem a verificação
@@ -232,6 +248,9 @@
                
                 
             }else{
+                //livro a session protocolo para permitir um novo cadastro
+                unset ($_SESSION['protocolo']);
+
                 $data = [
                     'bairros' => $bairros,
                     'escolas' => $escolas,
