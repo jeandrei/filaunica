@@ -52,5 +52,29 @@
                 'description'=> 'Modelo MVC com login para novos projetos'
 
 
+Para fazer funcionar o https quando estiver publicado edite os seguintes arquivos
+no raiz 
+.htaccess
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteRule ^$ public/ [L]
+  RewriteRule (.*) public/$1 [L]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+/public/.htaccess
+<ifModule mod_rewrite.c>
+  Options -Multiviews
+  RewriteEngine On
+  RewriteBase /filaunica/public
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+) index.php?url=$1 [QSA,L]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+
 
     

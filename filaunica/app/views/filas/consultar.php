@@ -6,7 +6,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">Posição na fila de espera: <b><?php echo $data->posicao; ?></h5>
-    <p class="card-text">Protocolo registrdo em: <?php echo date('d/m/Y H:i:s', strtotime($data->registro));?></p>
+    <p class="card-text">Protocolo registrado em: <?php echo date('d/m/Y H:i:s', strtotime($data->registro));?></p>
     <p class="card-text">Responsável pelo cadastro:<b> <?php echo $data->responsavel; ?></b></p>
     <p class="card-text">Iniciais do nome da criança:<b> <?php echo iniciais($data->nome); ?></b></p>
     <p class="card-text">Data de nascimento da criança:<b> <?php echo date('d/m/Y', strtotime($data->nascimento)); ?></b>
