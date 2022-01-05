@@ -68,8 +68,7 @@
                                      )     
           );
         
-         
-
+                  
           $paginate = $this->filaModel->getFilaBusca($page, $options);
 
           if($paginate->success == true)

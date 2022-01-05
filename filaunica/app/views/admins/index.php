@@ -43,11 +43,12 @@
 
 <!-- FORMULÁRIO COM OS CAMPOS DE PESQUISA -->
 <form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
-    <!-- LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
-    <div class="row">     
+
+    <!-- 1ª LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
+    <div class="row mb-2">
         
         <!-- COLUNA 1 PROTOCOLO-->
-        <div class="col-lg-2">
+        <div class="col-md-2">
             <label for="buscaprotocolo">
                 Buscar Protocolo
             </label>
@@ -63,10 +64,10 @@
                     <?php // echo $data['nome_err']; ?>
                 </span>
         </div>
-
-
+        
+        
         <!-- COLUNA 2 NOME-->
-        <div class="col-lg-4">
+        <div class="col-md-3">
             <label for="buscanome">
                 Buscar por Nome
             </label>
@@ -85,7 +86,7 @@
 
 
         <!-- COLUNA 3 ETAPA -->
-        <div class="col-lg-3">
+        <div class="col-md-3">
             <label for="buscaetapa">
                 Busca por Etapa
             </label>                               
@@ -110,15 +111,51 @@
                     <?php endforeach; ?>  
             </select>
         </div>
+<?php
+
+$escolas = $this->filaModel->getEscolas();    
+var_dump($escolas);
+
+?>
+      
+        <!-- COLUNA 3 ESCOLA -->
+        <div class="col-md-4">
+            <label for="buscaescola">
+                Busca por Escola
+            </label>                               
+            <select 
+                name="buscaescola" 
+                id="buscaescola" 
+                class="form-control"                                        
+            >
+                    <option value="Todos">Todos</option>
+                    <?php 
+                    $etapas = $this->etapaModel->getEtapas();                     
+                    foreach($etapas as $etapa) : ?> 
+                        <option value="<?php echo $etapa['id']; ?>"
+                                    <?php if(isset($_POST['buscaescola'])){
+                                    echo $_POST['buscaescola'] == $etapa['id'] ? 'selected':'';
+                                    }
+                                    ?>
+                        >
+                            <?php echo $etapa['descricao'];?>
+                        </option>
+                    <?php endforeach; ?>  
+            </select>
+        </div>
+    
+    <!-- FECHA A 1ª LINHA -->
+    </div>
+
+
+    <!-- 2ª LINHA E COLUNAS PARA OS CAMPOS DE BUSCA E BOTÕES-->
+    <div class="row">
         
-        
-        
-        <!-- COLUNA 4 SITUAÇÃO-->
-        <div class="col-lg-3">
+        <!-- COLUNA 1 SITUAÇÃO-->
+        <div class="col-md-3">
             <label for="buscasituacao">
                 Busca por Status
-            </label> 
-            <!--BOTÃO BUSCA SITUAÇÃO-->  
+            </label>             
 
             <select 
                 name="buscasituacao" 
@@ -126,8 +163,9 @@
                 class="form-control"                                        
             >
                     <option value="Todos">Todos</option>
+                    <option value="FE" <?php echo $_POST['buscasituacao'] == 'FE' ? 'selected':'';?>>Fora de Todas as Etapas</option>
                     <?php 
-                    $situacoes = $this->situacaoModel->getSituacoes();                     
+                    $situacoes = $this->situacaoModel->getSituacoes();                       
                     foreach($situacoes as $row) : ?> 
                         <option value="<?php echo $row->id; ?>"
                                     <?php if(isset($_POST['buscasituacao'])){
@@ -140,29 +178,18 @@
                     <?php endforeach; ?>  
             </select>    
         </div>
-        
-        
-        
-        
-        <!-- LINHA PARA O BOTÃO ATUALIZAR -->
-        <div class="row" style="margin-top:30px;">
-            <div class="col" style="padding-left:0;">
-                <div class="form-group mx-sm-3 mb-2">
-                    <input type="submit" class="btn btn-primary mb-2" value="Atualizar">                   
-                    <input type="button" class="btn btn-primary mb-2" value="Limpar" onClick="limpar()"> 
-                    <input type="submit" name="botao" class="btn btn-primary mb-2" value="Imprimir" onClick="newtab()">
-                </div>                                                
-            </div>
-            
-        <!-- FIM LINHA BOTÃO ATUALIZAR -->
-        </div>      
 
-
-    <!-- DIV LINHA PARA OS INPUTS E BOTÃO ATUALIZAR -->
-    </div>
-
-                                        
-
+        <div class="col-md-6 align-self-end mt-2" style="padding-left:5;">
+           
+                <input type="submit" class="btn btn-primary" value="Atualizar">                   
+                <input type="button" class="btn btn-primary" value="Limpar" onClick="limpar()"> 
+                <input type="submit" name="botao" class="btn btn-primary" value="Imprimir" onClick="newtab()">
+                                                       
+        </div>
+                                    
+                                    
+    <!-- FECHA A 2ª LINHA -->
+    </div>  
 
 </form>
 

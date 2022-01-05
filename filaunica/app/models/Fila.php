@@ -382,13 +382,17 @@
         
 
           //FUNÇÃO QUE EXECUTA A SQL PAGINATE
-          public function getFilaBusca($page, $options){             
-        
+          public function getFilaBusca($page, $options){   
 
             $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
             
+
+            // SE A SITUAÇÃO É FE eu pego todos os registros cuja etapa é NULL e a situação é 1 Aguardando           
+            if(($options['named_params'][':situacao_id']) == "FE"){
+                $sql .= " WHERE fila.situacao_id = 1 AND (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) IS NULL";
+            }
             // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
-            if(($options['named_params'][':etapa_id']) == "Todos"){                    
+            elseif(($options['named_params'][':etapa_id']) == "Todos"){                    
                 $sql .= " WHERE fila.id";
             } else {
                 // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
@@ -401,13 +405,13 @@
             }
           
 
-            if(($options['named_params'][':situacao_id']) <> "Todos"){
+            if((($options['named_params'][':situacao_id']) <> "Todos") && (($options['named_params'][':situacao_id']) <> "FE")){
                 $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
-            }
-            
+            }              
              
 
             $sql .= " ORDER BY registro ASC"; 
+            
             
             if(($options['named_params'][':protocolo']) <> ""){
                 $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
