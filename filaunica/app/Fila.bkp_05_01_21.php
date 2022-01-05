@@ -379,10 +379,64 @@
             }
         }
          
-              
+        
+
+          //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+          public function getFilaBusca_correto($page, $options){   
+            
+            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
+            
+
+            // SE A SITUAÇÃO É FE eu pego todos os registros cuja etapa é NULL e a situação é 1 Aguardando           
+            if(($options['named_params'][':situacao_id']) == "FE"){
+                $sql .= " WHERE fila.situacao_id = 1 AND (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) IS NULL";
+            }
+            // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
+            elseif(($options['named_params'][':etapa_id']) == "Todos"){                    
+                $sql .= " WHERE fila.id";
+            } else {
+                // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
+                $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = " . $options['named_params'][':etapa_id'];          
+               
+            }
+
+            if(!empty($options['named_params'][':nome'])){
+                $sql .= " AND nomecrianca LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
+            }
+          
+
+            if((($options['named_params'][':situacao_id']) <> "Todos") && (($options['named_params'][':situacao_id']) <> "FE")){
+                $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
+            }    
+            
+            //Se selecionou uma escola eu ordeno pela primeira opção da escola
+            if((($options['named_params'][':escola_id']) <> "Todos") && (($options['named_params'][':situacao_id']) <> "FE")){
+                $sql .= " AND (opcao1_id = " . "'" . $options['named_params'][':escola_id'] ."'";
+                $sql .= " OR opcao2_id = " . "'" . $options['named_params'][':escola_id'] ."'";
+                $sql .= " OR opcao3_id = " . "'" . $options['named_params'][':escola_id'] ."')";
+                $sql .= " ORDER BY opcao1_id ASC"; 
+            } else {
+                //caso contrário eu ordeno pelo registro sempre
+                $sql .= " ORDER BY registro ASC"; 
+            }    
+            
+            
+            if(($options['named_params'][':protocolo']) <> ""){
+                $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
+            }
+            
+            //var_dump($sql);
+
+            $paginate = new pagination($page, $sql, $options);
+            return  $paginate;
+        }
+        
+        
+
+
+
 
         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
-        //quando for para relatório usar getFilaBusca($relatorio=true,$page=NULL,$options)
         public function getFilaBusca($relatorio,$page,$options){   
             
             $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
@@ -437,7 +491,47 @@
                 return  $result;
             }
            
-        }         
+        }
+
+
+
+         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
+          public function getFilaBuscaRelatorio($options){             
+        
+
+            $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
+            
+            // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
+            if(($options['named_params'][':etapa_id']) == "Todos"){                    
+                $sql .= " WHERE fila.id";
+            } else {
+                // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
+                $sql .= " WHERE (SELECT id FROM etapa WHERE fila.nascimento>=etapa.data_ini AND fila.nascimento<=etapa.data_fin) = " . $options['named_params'][':etapa_id'];          
+               
+            }
+
+            if(!empty($options['named_params'][':nome'])){
+                $sql .= " AND nomecrianca LIKE " . "'%" . $options['named_params'][':nome'] . "%'";
+            }
+          
+
+            if(($options['named_params'][':situacao_id']) <> "Todos"){
+                $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
+            }
+            
+             
+
+            $sql .= " ORDER BY etapa, registro ASC"; 
+            
+            /*if(($options['named_params'][':protocolo']) <> ""){
+                $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
+            }*/
+
+            $this->db->query($sql);
+            $result = $this->db->resultSet();
+            
+            return  $result;
+        }  
 
 
         
@@ -446,14 +540,6 @@
             $paginate = new pagination($page, "SELECT * FROM fila ORDER BY id", $options);
             return  $paginate;
         } 
-
-        public function getMatriculadosAnoMes($ano, $mes){
-            $this->db->query('SELECT * FROM fila WHERE YEAR(registro) = :ano AND MONTH(registro) = :mes AND situacao_id = 2');
-            $this->db->bind(':ano',$ano);
-            $this->db->bind(':mes',$mes);
-            $result = $this->db->resultSet(); 
-            return $result;
-        }
         
         
     

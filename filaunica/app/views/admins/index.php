@@ -19,6 +19,7 @@
         document.getElementById('buscaprotocolo').value = "";
         document.getElementById('buscaetapa').value = "Todos";
         document.getElementById('buscasituacao').value = "Todos";
+        document.getElementById('buscaescola').value = "Todos";        
         focofield("buscanome");
     }    
     
@@ -111,13 +112,8 @@
                     <?php endforeach; ?>  
             </select>
         </div>
-<?php
 
-$escolas = $this->filaModel->getEscolas();    
-var_dump($escolas);
-
-?>
-      
+        
         <!-- COLUNA 3 ESCOLA -->
         <div class="col-md-4">
             <label for="buscaescola">
@@ -130,15 +126,15 @@ var_dump($escolas);
             >
                     <option value="Todos">Todos</option>
                     <?php 
-                    $etapas = $this->etapaModel->getEtapas();                     
-                    foreach($etapas as $etapa) : ?> 
-                        <option value="<?php echo $etapa['id']; ?>"
+                    $escolas = $this->filaModel->getEscolas();                    
+                    foreach($escolas as $escola) : ?> 
+                        <option value="<?php echo $escola->id; ?>"
                                     <?php if(isset($_POST['buscaescola'])){
-                                    echo $_POST['buscaescola'] == $etapa['id'] ? 'selected':'';
+                                    echo $_POST['buscaescola'] == $escola->id ? 'selected':'';
                                     }
                                     ?>
                         >
-                            <?php echo $etapa['descricao'];?>
+                            <?php echo $escola->nome;?>
                         </option>
                     <?php endforeach; ?>  
             </select>

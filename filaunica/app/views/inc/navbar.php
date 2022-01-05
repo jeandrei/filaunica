@@ -19,6 +19,15 @@
                     <li class="nav-item">
                       <a class="nav-link" href="<?php echo URLROOT; ?>/admins">Fila</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Relatórios
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                          <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioMensal">Relatorio Teste</a>                                                             
+                        </div>
+                      </li>
+                    
                             
 
                 <!--FAZ A VERIFICAÇÃO SE O USUÁRIO É ADMINISTRADOR, SE SIM CARREGA OS MENUS DE CADASTRO-->

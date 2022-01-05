@@ -24,7 +24,9 @@
               $situacao_id = $_GET['situacao_id'];
               // SE ENTROU AQUI É PQ FOI CLICADO NO LINK DA PAGINAÇÃO ENTÃO PARA MANTER O VALOR ATUAL DA BUSCA PASSO O VALOR DO GET PARA O POST
               $_POST['buscasituacao'] = $situacao_id;
-
+              
+              $escola_id = $_GET['escola_id'];
+              $_POST['buscaescola'] = $escola_id;
                
               // etapa_id vem lá do get &etapa_id
                $etapa_id = $_GET['etapa_id'];               
@@ -47,7 +49,12 @@
               $etapa_id = $_POST['buscaetapa'];
               if(!isset($etapa_id)){                
                 $etapa_id = 'Todos';
-            }             
+              }  
+            
+              $escola_id = $_POST['buscaescola'];
+              if(!isset($escola_id)){                
+                $escola_id = 'Todos';
+              } 
 
               $nome = $_POST['buscanome'];
               $protocolo = $_POST['buscaprotocolo'];
@@ -59,17 +66,18 @@
           
           $options = array(
               'results_per_page' => 10,
-              'url' => URLROOT . '/admins/index.php?page=*VAR*&protocolo=' . $protocolo . '&situacao_id=' . $situacao_id . '&etapa_id=' . $etapa_id . '&nome=' . $nome,
+              'url' => URLROOT . '/admins/index.php?page=*VAR*&protocolo=' . $protocolo . '&situacao_id=' . $situacao_id . '&etapa_id=' . $etapa_id . '&escola_id=' . $escola_id . '&nome=' . $nome,
               'named_params' => array(
                                       ':protocolo' => $protocolo,
                                       ':situacao_id' => $situacao_id,
                                       ':etapa_id' => $etapa_id,
+                                      ':escola_id' => $escola_id,
                                       ':nome' => $nome
                                      )     
           );
         
                   
-          $paginate = $this->filaModel->getFilaBusca($page, $options);
+          $paginate = $this->filaModel->getFilaBusca($relatorio=false, $page, $options);
 
           if($paginate->success == true)
           {             
@@ -114,8 +122,9 @@
           //SE O BOTÃO CLICADO FOR O IMPRIMIR EU CHAMO A FUNÇÃO getDados($page, $options,1) ONDE 1 É QUE É PARA IMPRIMIR E 0 É PARA LISTAR NA PAGINAÇÃO
           if($_POST['botao'] == "Imprimir"){              
               
-            $result_r = $this->filaModel->getFilaBuscaRelatorio($options);
-            
+            //$result_r = $this->filaModel->getFilaBuscaRelatorio($options);
+            $result_r = $this->filaModel->getFilaBusca($relatorio=true, $page=NULL, $options);
+
             if(!empty($result_r)){
               //faço o foreach para poder utilizar os métodos
               foreach($result_r as $row){
@@ -292,6 +301,41 @@
       }
          
     }
+
+    public function relatorioMensal(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $fila = $this->filaModel->getMatriculadosAnoMes($_POST['ano'],$_POST['mes']);     
+          
+                    
+          foreach($fila as $row){
+            $data[] = array(             
+              'etapa' => ($this->etapaModel->getEtapaDescricao($row->nascimento)) ? $this->etapaModel->getEtapaDescricao($row->nascimento) : "FORA ETAPAS",
+              'nomecrianca' => $row->nomecrianca,
+              'nascimento' => date('d/m/Y', strtotime($row->nascimento)),
+              'responsavel' => $row->responsavel,
+              'protocolo' => $row->protocolo,
+              'registro' => date('d/m/Y H:i:s', strtotime($row->registro)),
+              'telefone' => $row->telefone,
+              'celular' => $row->celular,
+              'situacao' => $this->situacaoModel->getDescricaoSituacaoById($row->situacao_id),                  
+              'situacao_id' => $row->situacao_id,
+              'opcao1_id' => $this->filaModel->getEscolasById($row->opcao1_id)->nome,
+              'opcao2_id' => $this->filaModel->getEscolasById($row->opcao2_id)->nome,
+              'opcao3_id' => $this->filaModel->getEscolasById($row->opcao3_id)->nome,
+              'opcao_matricula' => $this->filaModel->getEscolasById($row->opcao_matricula)->nome,
+              'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno),
+              'turno_matricula' => $this->filaModel->getTurno($row->turno_matricula),
+              'ultimo_historico' => $this->filaModel->getLastHistorico($row->id)->historico              
+            );
+          }
+            
+          
+          $this->view('relatorios/relatoriomatriculamensal',$data);
+      } else {
+          $this->view('admins/relatoriomatriculamensal');
+      }      
+      
+  }
 
 
     

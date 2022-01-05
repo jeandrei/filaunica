@@ -16,8 +16,7 @@
             //pega todos os bairros
             $bairros = $this->filaModel->getBairros();
             //pega todas as escolas
-            $escolas = $this->filaModel->getEscolas();          
-            
+            $escolas = $this->filaModel->getEscolas();      
                        
 
             // Check for POST            
@@ -324,6 +323,6 @@
             $data['etapas'] = $this->filaModel->getEtapas();           
             $this->view('filas/listachamada', $data);
 
-        }
+        }    
 
     }
