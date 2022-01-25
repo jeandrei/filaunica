@@ -448,7 +448,34 @@
         } 
 
         public function getMatriculadosAnoMes($ano, $mes){
-            $this->db->query('SELECT * FROM fila WHERE YEAR(registro) = :ano AND MONTH(registro) = :mes AND situacao_id = 2');
+            $this->db->query('
+                            SELECT 
+                                f.id as id, 
+                                f.responsavel, 
+                                f.telefone, 
+                                f.celular, 
+                                f.nomecrianca, 
+                                f.protocolo, 
+                                f.nascimento,
+                                hif.id as id_historico,
+                                hif.fila_id,
+                                hif.registro,
+                                hif.situacao_id,
+                                hif.historico 
+                            FROM 
+                                fila f, 
+                                historico_id_fila hif  
+                            WHERE 
+                                hif.fila_id = f.id 
+                                AND 
+                                YEAR(hif.registro) = 2022
+                            AND 
+                                MONTH(hif.registro) = 01
+                            AND 
+                                hif.situacao_id = 2
+                            AND 
+                                hif.id = (SELECT MAX(id) FROM historico_id_fila WHERE fila_id = f.id)
+                            ');
             $this->db->bind(':ano',$ano);
             $this->db->bind(':mes',$mes);
             $result = $this->db->resultSet(); 
