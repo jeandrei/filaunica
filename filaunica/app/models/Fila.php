@@ -468,9 +468,9 @@
                             WHERE 
                                 hif.fila_id = f.id 
                                 AND 
-                                YEAR(hif.registro) = 2022
+                                YEAR(hif.registro) = :ano
                             AND 
-                                MONTH(hif.registro) = 01
+                                MONTH(hif.registro) = :mes
                             AND 
                                 hif.situacao_id = 2
                             AND 
