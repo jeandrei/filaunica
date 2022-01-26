@@ -310,9 +310,9 @@
           foreach($fila as $row){
             $data[] = array(             
               'etapa' => ($this->etapaModel->getEtapaDescricao($row->nascimento)) ? $this->etapaModel->getEtapaDescricao($row->nascimento) : "FORA ETAPAS",
-              'nomecrianca' => $row->nomecrianca,
+              'nomecrianca' => substr($row->nomecrianca,0,40),
               'nascimento' => date('d/m/Y', strtotime($row->nascimento)),
-              'responsavel' => $row->responsavel,
+              'responsavel' => substr($row->responsavel,0,40),
               'protocolo' => $row->protocolo,
               'registro' => date('d/m/Y H:i:s', strtotime($row->registro)),
               'telefone' => $row->telefone,
@@ -322,14 +322,15 @@
               'opcao1_id' => $this->filaModel->getEscolasById($row->opcao1_id)->nome,
               'opcao2_id' => $this->filaModel->getEscolasById($row->opcao2_id)->nome,
               'opcao3_id' => $this->filaModel->getEscolasById($row->opcao3_id)->nome,
-              'opcao_matricula' => $this->filaModel->getEscolasById($row->opcao_matricula)->nome,
+              'opcao_matricula' => substr($this->filaModel->getEscolasById($row->opcao_matricula)->nome,0,40),
               'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno),
               'turno_matricula' => $this->filaModel->getTurno($row->turno_matricula),              
               'ultimo_historico' => $this->filaModel->getLastHistorico($row->id)->historico              
             );       
           }
-            
-          
+
+          //$data = array_merge($data, ['ano' => 2021, 'mes' => 01]);         
+                      
           $this->view('relatorios/relatoriomatriculamensal',$data);
       } else {
           $this->view('admins/relatoriomatriculamensal');

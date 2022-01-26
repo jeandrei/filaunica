@@ -3,7 +3,7 @@
 require APPROOT . '/views/inc/fpdf/fpdf.php'; 
 
 
-//var_dump($data);
+//var_dump($_POST);
 
 class PDF extends FPDF
 {            
@@ -23,7 +23,7 @@ class PDF extends FPDF
                 $this->Ln(20);
                 // Move to the right
                 $this->Cell(120);
-                $this->Cell(30,10, utf8_decode("Lista de Matriculados Mensal"),0,0,'C');
+                $this->Cell(30,10, utf8_decode("Lista de Matriculados Mensal " . $_POST['mes'] . "/" . $_POST['ano']),0,0,'C');
                 // Line break
                 $this->Ln(20);                
             }
