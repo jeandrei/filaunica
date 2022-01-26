@@ -457,6 +457,8 @@
                                 f.nomecrianca, 
                                 f.protocolo, 
                                 f.nascimento,
+                                f.turno_matricula,
+                                f.opcao_matricula,
                                 hif.id as id_historico,
                                 hif.fila_id,
                                 hif.registro,
@@ -475,6 +477,8 @@
                                 hif.situacao_id = 2
                             AND 
                                 hif.id = (SELECT MAX(id) FROM historico_id_fila WHERE fila_id = f.id)
+                            ORDER BY 
+                                f.nascimento    
                             ');
             $this->db->bind(':ano',$ano);
             $this->db->bind(':mes',$mes);

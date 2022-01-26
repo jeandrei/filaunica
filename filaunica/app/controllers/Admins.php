@@ -324,9 +324,9 @@
               'opcao3_id' => $this->filaModel->getEscolasById($row->opcao3_id)->nome,
               'opcao_matricula' => $this->filaModel->getEscolasById($row->opcao_matricula)->nome,
               'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno),
-              'turno_matricula' => $this->filaModel->getTurno($row->turno_matricula),
+              'turno_matricula' => $this->filaModel->getTurno($row->turno_matricula),              
               'ultimo_historico' => $this->filaModel->getLastHistorico($row->id)->historico              
-            );
+            );       
           }
             
           

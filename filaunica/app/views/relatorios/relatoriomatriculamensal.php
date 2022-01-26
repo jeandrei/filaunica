@@ -48,10 +48,10 @@ class PDF extends FPDF
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Nº", "Nome da Criança", "Responsável pelo cadastro", "Nascimento", "Etapa", "Protocolo", "Situação");
+            $colunas =array("Nº", "Nome da Criança", "Responsável pelo cadastro", "Nasc", "Etapa", "Turno", "Unidade Escolar");
             //largura das colunas
             //$larguracoll = array(1 => 80, 2 => 80, 3 => 20, 4 => 25, 5 => 25, 6 => 30);
-            $larguracoll = array(1 => 10, 2 => 80, 3 => 80, 4 => 20, 5 => 25, 6 => 25, 7 => 30);
+            $larguracoll = array(1 => 10, 2 => 70, 3 => 70, 4 => 15, 5 => 25, 6 => 15, 7 => 75);
 
             $tam_fonte = 10;    
                         
@@ -87,15 +87,15 @@ class PDF extends FPDF
                          $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["responsavel"]),1,0,'C');
                          $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C');                         
                          $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C');
-                         $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["protocolo"]),1,0,'C');
-                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["situacao"]),1,0,'C'); 
+                         $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["turno_matricula"]),1,0,'C');
+                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["opcao_matricula"]),1,0,'C'); 
                           
                             
                          
                          if($row['ultimo_historico']){
                          $pdf->Ln(); 
                          $pdf->SetFillColor(255, 255, 179); 
-                         $pdf->Cell(270,$tam_fonte,utf8_decode("Último histórico: " . $row['ultimo_historico']),1,0,'C',true);   
+                         $pdf->Cell(280,$tam_fonte,utf8_decode("Último histórico: " . $row['ultimo_historico']),1,0,'C',true);   
                          }
                         
                      } 
