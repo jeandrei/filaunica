@@ -50,10 +50,10 @@ class PDF extends FPDF
             //AddPage('P') RETRATO AddPage('L') PAISAGEM
             //$pdf->AddPage('L');            
             $pdf->SetFont('Arial','B',8);
-            $colunas =array("Nome da Criança", "Nasc", "Etapa", "Turno", "Opção 1", "Opção 2", "Opção 3");
+            $colunas =array("Nome da Criança", "Nasc", "Responsável","Contato", "Etapa", "Turno", "Opção 1", "Opção 2", "Opção 3");
             //largura das colunas
             //$larguracoll = array(1 => 80, 2 => 80, 3 => 20, 4 => 25, 5 => 25, 6 => 30);
-            $larguracoll = array(1 => 70, 2 => 15, 3 => 25, 4 => 15, 5 => 50, 6 => 50, 7 => 50);
+            $larguracoll = array(1 => 60, 2 => 15, 3 => 60, 4 => 20, 5 => 20, 6 => 15, 7 => 31, 8 => 31, 9 => 31);
 
             $tam_fonte = 10;    
                         
@@ -75,22 +75,31 @@ class PDF extends FPDF
                      //coloca as colunas com os títulos da tabela
                      foreach($colunas as $coluna){
                          $i++;
-                         $pdf->SetFont('Arial','B',8);                   
+                         $pdf->SetFont('Arial','B',7);                   
                          $pdf->Cell($larguracoll[$i],$tam_fonte,utf8_decode($coluna),1);
                      }
                     
                      $contador = 0;
                      foreach($data["dados"] as $row) { 
                          $contador++;      
-                         $pdf->SetFont('Arial','',8);  
+                         $pdf->SetFont('Arial','',7);  
                          $pdf->Ln();                          
                          $pdf->Cell($larguracoll[1],$tam_fonte,utf8_decode($row["nomecrianca"]),1,0,'C');
-                         $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C');                         
-                         $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C');
-                         $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["opcao_turno"]),1,0,'C');
-                         $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["opcao1_id"]),1,0,'C'); 
-                         $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["opcao2_id"]),1,0,'C'); 
-                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["opcao3_id"]),1,0,'C'); 
+                         $pdf->Cell($larguracoll[2],$tam_fonte,utf8_decode($row["nascimento"]),1,0,'C'); 
+                         $pdf->Cell($larguracoll[3],$tam_fonte,utf8_decode($row["responsavel"]),1,0,'C'); 
+                         if($row["celular"]){
+                            $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["celular"]),1,0,'C');
+                         } elseif ($row["telefone"]){
+                            $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode($row["telefone"]),1,0,'C');
+
+                         } else {
+                            $pdf->Cell($larguracoll[4],$tam_fonte,utf8_decode("Sem Contato"),1,0,'C');
+                         }                                          
+                         $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode($row["etapa"]),1,0,'C');
+                         $pdf->Cell($larguracoll[6],$tam_fonte,utf8_decode($row["opcao_turno"]),1,0,'C');
+                         $pdf->Cell($larguracoll[7],$tam_fonte,utf8_decode($row["opcao1_id"]),1,0,'C'); 
+                         $pdf->Cell($larguracoll[8],$tam_fonte,utf8_decode($row["opcao2_id"]),1,0,'C'); 
+                         $pdf->Cell($larguracoll[9],$tam_fonte,utf8_decode($row["opcao3_id"]),1,0,'C'); 
                          
                         
                      }
