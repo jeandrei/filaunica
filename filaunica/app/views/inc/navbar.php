@@ -24,7 +24,8 @@
                           Relatórios
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                          <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioMensal">Relatorio Teste</a>                                                             
+                          <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioMensal">Relatorio de Matrículas Mensal</a> 
+                          <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioDemanda">Relatorio de Demanda por Unidade</a>                                                            
                         </div>
                       </li>
                     

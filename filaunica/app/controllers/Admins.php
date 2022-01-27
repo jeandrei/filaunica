@@ -338,6 +338,54 @@
       
   }
 
+  public function relatorioDemanda(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $fila = $this->filaModel->getDemandaEscola($_POST['escola_id']); 
+        $totalOpcao1 = $this->filaModel->getDemandaOpcao1($_POST['escola_id']);       
+    
+        
+                  
+        foreach($fila as $row){
+          $dados[] = array(             
+            'etapa' => ($this->etapaModel->getEtapaDescricao($row->nascimento)) ? $this->etapaModel->getEtapaDescricao($row->nascimento) : "FORA ETAPAS",
+            'nomecrianca' => substr($row->nomecrianca,0,40),
+            'nascimento' => date('d/m/Y', strtotime($row->nascimento)),
+            'responsavel' => substr($row->responsavel,0,40),
+            'protocolo' => $row->protocolo,
+            'registro' => date('d/m/Y H:i:s', strtotime($row->registro)),
+            'telefone' => $row->telefone,
+            'celular' => $row->celular,
+            'situacao' => $this->situacaoModel->getDescricaoSituacaoById($row->situacao_id),                  
+            'situacao_id' => $row->situacao_id,
+            'opcao1_id' => substr($this->filaModel->getEscolasById($row->opcao1_id)->nome,0,25),
+            'opcao2_id' => substr($this->filaModel->getEscolasById($row->opcao2_id)->nome,0,25),
+            'opcao3_id' => substr($this->filaModel->getEscolasById($row->opcao3_id)->nome,0,25),
+            'opcao_matricula' => substr($this->filaModel->getEscolasById($row->opcao_matricula)->nome,0,40),
+            'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno),
+            'turno_matricula' => $this->filaModel->getTurno($row->turno_matricula),              
+            'ultimo_historico' => $this->filaModel->getLastHistorico($row->id)->historico              
+          );       
+        }
+
+
+        //para poder passar os totais junto eu recrio o array mas dessa vez multidimensional
+        $data = array(
+          "dados" => $dados,
+          
+          "totais" => array(
+            "totalOpcao1" => $totalOpcao1->total
+          )
+          
+        );
+
+                    
+        $this->view('relatorios/relatoriodemandaporunidade',$data);
+    } else {        
+        $this->view('admins/relatoriodemandaporunidade');
+    }      
+    
+}
+
 
     
 
