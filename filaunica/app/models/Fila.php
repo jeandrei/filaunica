@@ -508,8 +508,8 @@
 
 
 
-        // RETORNA O TOTAL DE DEMANDA DE UMA ESCOLA
-        public function getDemandaOpcao1($escola_id){           
+        // RETORNA O TOTAL DE DEMANDA OPÇÃO1 DE UMA ESCOLA
+        public function getDemandaOpcao1Rel($escola_id){           
             $sql = 'SELECT COUNT(opcao1_id) as total FROM fila f WHERE f.situacao_id = 1';
 
             if($escola_id <> "Todos"){
@@ -526,6 +526,25 @@
             return $count;            
         }
         
+
+        public function getDemandaOpcaoEscola($escola_id, $opcao){ 
+            if($opcao == 1){
+                $this->db->query('SELECT COUNT(id) as total FROM fila WHERE situacao_id = 1 AND opcao1_id = :escola_id');
+            }
+
+            if($opcao == 2){
+                $this->db->query('SELECT COUNT(id) as total FROM fila WHERE situacao_id = 1 AND opcao2_id = :escola_id');
+            }
+
+            if($opcao == 3){
+                $this->db->query('SELECT COUNT(id) as total FROM fila WHERE situacao_id = 1 AND opcao3_id = :escola_id');
+            }       
+           
+            $this->db->bind(':escola_id',$escola_id);            
+
+            $count = $this->db->single();
+            return $count;            
+        }
         
     
     

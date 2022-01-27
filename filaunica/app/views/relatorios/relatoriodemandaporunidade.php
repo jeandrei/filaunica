@@ -2,6 +2,14 @@
 
 require APPROOT . '/views/inc/fpdf/fpdf.php'; 
 
+/* foreach($data['totais'] as $total){
+    echo $total['escola'];
+    echo $total['totalOpcao1'];
+    echo $total['totalOpcao2'];
+    echo $total['totalOpcao3'];
+}
+
+die(var_dump($data['totais'])); */
 
 //die(var_dump($data["totais"]["totalOpcao1"]));
 //echo $data["parametros"]["total1"];
@@ -108,7 +116,18 @@ class PDF extends FPDF
                     $pdf->SetFont('Arial','',12);  
                     $pdf->Ln();    
                     $pdf->Ln();                       
-                    $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode("Total Opção 1: " . $data["totais"]["totalOpcao1"]),0,0,'C');
+                    $pdf->Cell($larguracoll[5],$tam_fonte,utf8_decode("Total Opção 1: " . $data["totalOp1"]["totalOpcao1"]),0,0,'C');
+
+
+                    //totais por escola e opção
+                    $pdf->AddPage('L');
+                    $pdf->Cell(120);
+                    $pdf->Cell(30,10, utf8_decode("Resumo de Demanda por Unidade e Opção"),0,0,'C');
+                    foreach($data['totais'] as $total){
+                        $pdf->SetFont('Arial','',12);  
+                        $pdf->Ln(); 
+                        $pdf->Cell(200,$tam_fonte,utf8_decode($total["escola"] . ": (Opção 1: " . $total["totalOpcao1"].") - (Opção 2: " . $total["totalOpcao2"] . ") - (Opção 3: " . $total["totalOpcao3"] . ")"),0,0,'L');
+                    }
                     
                 }   
 
