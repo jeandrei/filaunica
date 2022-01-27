@@ -339,7 +339,7 @@
   }
 
   public function relatorioDemanda(){
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {       
         $fila = $this->filaModel->getDemandaEscola($_POST['escola_id']); 
         $totalOpcao1 = $this->filaModel->getDemandaOpcao1($_POST['escola_id']);       
     

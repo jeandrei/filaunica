@@ -486,38 +486,44 @@
             return $result;
         }
 
+       
+
+        public function getDemandaEscola($escola_id){            
+            $sql = 'SELECT * FROM fila f WHERE f.situacao_id = 1';
+            
+            if($escola_id <> "Todos"){
+                $sql.= ' AND f.opcao1_id = :escola_id';
+            }
+
+            $this->db->query($sql);
+            
+            if($escola_id <> "Todos"){
+                $this->db->bind(':escola_id',$escola_id);
+            } 
+           
+            $result = $this->db->resultSet(); 
+            return $result;
+        }
+
+
+
 
         // RETORNA O TOTAL DE DEMANDA DE UMA ESCOLA
         public function getDemandaOpcao1($escola_id){           
-            $this->db->query('
-                            SELECT 
-                                COUNT(opcao1_id) as total 
-                            FROM 
-                                fila f 
-                            WHERE 
-                                f.opcao1_id = :escola_id 
-                            AND 
-                                f.situacao_id = 1'
-                            ); 
-            $this->db->bind(':escola_id',$escola_id);                                        
+            $sql = 'SELECT COUNT(opcao1_id) as total FROM fila f WHERE f.situacao_id = 1';
+
+            if($escola_id <> "Todos"){
+                $sql.= ' AND f.opcao1_id = :escola_id';
+            }
+                        
+            $this->db->query($sql);
+            
+            if($escola_id <> "Todos"){
+                $this->db->bind(':escola_id',$escola_id);
+            } 
+
             $count = $this->db->single();
             return $count;            
-        }
-
-        public function getDemandaEscola($escola_id){            
-            $this->db->query('
-                            SELECT 
-                                *
-                            FROM 
-                                fila f                                
-                            WHERE 
-                                f.opcao1_id = :escola_id 
-                            AND 
-                                f.situacao_id = 1                          
-                            ');
-            $this->db->bind(':escola_id',$escola_id);            
-            $result = $this->db->resultSet(); 
-            return $result;
         }
         
         
