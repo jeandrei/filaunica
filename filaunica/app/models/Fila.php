@@ -425,17 +425,18 @@
             if(($options['named_params'][':protocolo']) <> ""){
                 $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
             }
-            
+            //die(var_dump($sql));
             
 
             if($relatorio == false){
                 $paginate = new pagination($page, $sql, $options);
                 return  $paginate;
-            } else {
+            } else {                
                 $this->db->query($sql);
                 $result = $this->db->resultSet();                          
                 return  $result;
             }
+           
            
         }         
 
@@ -508,9 +509,29 @@
 
 
 
+        public function getAlunoEspecialEscola($escola_id){            
+            $sql = 'SELECT * FROM fila f WHERE f.situacao_id = 1 AND f.deficiencia = 1';
+            
+            if($escola_id <> "Todos"){
+                $sql.= ' AND (f.opcao1_id = :escola_id OR f.opcao2_id = :escola_id OR f.opcao3_id = :escola_id)';
+            }
+
+            $this->db->query($sql);
+            
+            if($escola_id <> "Todos"){
+                $this->db->bind(':escola_id',$escola_id);
+            } 
+           
+            $result = $this->db->resultSet(); 
+            return $result;
+        }
+
+
+
+
         // RETORNA O TOTAL DE DEMANDA OPÇÃO1 DE UMA ESCOLA
         public function getDemandaOpcao1Rel($escola_id){           
-            $sql = 'SELECT COUNT(opcao1_id) as total FROM fila f WHERE f.situacao_id = 1';
+            $sql = 'SELECT COUNT(id) as total FROM fila f WHERE f.situacao_id = 1';
 
             if($escola_id <> "Todos"){
                 $sql.= ' AND f.opcao1_id = :escola_id';
@@ -521,7 +542,7 @@
             if($escola_id <> "Todos"){
                 $this->db->bind(':escola_id',$escola_id);
             } 
-
+            
             $count = $this->db->single();
             return $count;            
         }
