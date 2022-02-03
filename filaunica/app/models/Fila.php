@@ -496,11 +496,14 @@
                 $sql.= ' AND f.opcao1_id = :escola_id';
             }
 
+            $sql.= ' ORDER BY f.nascimento';            
+
             $this->db->query($sql);
             
             if($escola_id <> "Todos"){
                 $this->db->bind(':escola_id',$escola_id);
             } 
+
            
             $result = $this->db->resultSet(); 
             return $result;
@@ -515,6 +518,8 @@
             if($escola_id <> "Todos"){
                 $sql.= ' AND (f.opcao1_id = :escola_id OR f.opcao2_id = :escola_id OR f.opcao3_id = :escola_id)';
             }
+
+            $sql.= ' ORDER BY f.nascimento';
 
             $this->db->query($sql);
             
