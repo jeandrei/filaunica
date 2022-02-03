@@ -33,7 +33,7 @@
         } 
 
         public function getEscolas(){
-            $this->db->query("SELECT id, nome FROM escola");
+            $this->db->query("SELECT id, nome FROM escola WHERE emAtividade = 1");
 
             return $this->db->resultSet();
         }

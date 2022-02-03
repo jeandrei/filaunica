@@ -51,7 +51,8 @@ INSERT INTO `bairro` (`id`, `nome`) VALUES
 (9, 'Centro'),
 (10, 'São Nicolau'),
 (11, 'NSra de Fátima'),
-(12, 'São Cristovão');
+(12, 'São Cristovão'),
+(13, 'São Francisco de Assis');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,8 @@ CREATE TABLE `escola` (
   `nome` varchar(255) NOT NULL,
   `bairro_id` int(11) NOT NULL,
   `logradouro` varchar(255) NOT NULL,
-  `numero` int(11) NOT NULL
+  `numero` int(11) NOT NULL,
+  `emAtividade` int(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -102,7 +104,8 @@ INSERT INTO `escola` (`id`, `nome`, `bairro_id`, `logradouro`, `numero`) VALUES
 (10, 'CRECHE CASA DA AMIZADE', 5, 'Rua Artur Silvino dos Reis', 63),
 (11, 'CRECHE MUNICIPAL JOÃO BATISTA DA CRUZ', 5, 'Rua João Carlos Alves', 40),
 (12, 'CRECHE MUNICIPAL TEREZINHA MARLENE CORREIA', 5, 'Rua Maria Joaquina Bento', 85),
-(13, 'CEI JULIO CORREA DE MELLO', 10, 'Rua Sebastião Schmitz', 0);
+(13, 'CEI JULIO CORREA DE MELLO', 10, 'Rua Sebastião Schmitz', 0),
+(14, 'CEI LACI SIMÃO CORRÊA DE MELO', 13, 'Osório Domingos Corrêa', 1992);
 
 -- --------------------------------------------------------
 
