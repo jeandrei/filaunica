@@ -7,6 +7,7 @@
             //inicia a classe Database
             $this->db = new Database;
         }
+        
 
 /********************************************************************MÉTODOS QUE RETORNAM DADOS DIVERSOS******************************************************/
 
@@ -415,7 +416,7 @@
                 $sql .= " AND (opcao1_id = " . "'" . $options['named_params'][':escola_id'] ."'";
                 $sql .= " OR opcao2_id = " . "'" . $options['named_params'][':escola_id'] ."'";
                 $sql .= " OR opcao3_id = " . "'" . $options['named_params'][':escola_id'] ."')";
-                $sql .= " ORDER BY opcao1_id ASC"; 
+                $sql .= " ORDER BY registro, opcao1_id ASC"; 
             } else {
                 //caso contrário eu ordeno pelo registro sempre
                 $sql .= " ORDER BY registro ASC"; 
