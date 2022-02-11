@@ -441,6 +441,38 @@
 
 
 
+  public function relatorioAguardandoAlfabetica(){       
+     
+      $fila = $this->filaModel->getAguardandoAlfabetica();        
+      
+                  
+        foreach($fila as $row){
+          $data[] = array( 
+            'etapa' => ($this->etapaModel->getEtapaDescricao($row->nascimento)) ? $this->etapaModel->getEtapaDescricao($row->nascimento) : "FORA ETAPAS",
+            'nomecrianca' => substr($row->nomecrianca,0,40),
+            'nascimento' => date('d/m/Y', strtotime($row->nascimento)),
+            'responsavel' => substr($row->responsavel,0,40),
+            'protocolo' => $row->protocolo,
+            'registro' => date('d/m/Y H:i:s', strtotime($row->registro)),
+            'telefone' => $row->telefone,
+            'celular' => $row->celular,
+            'situacao' => $this->situacaoModel->getDescricaoSituacaoById($row->situacao_id),                  
+            'situacao_id' => $row->situacao_id,
+            'opcao1_id' => substr($this->filaModel->getEscolasById($row->opcao1_id)->nome,0,20),
+            'opcao2_id' => substr($this->filaModel->getEscolasById($row->opcao2_id)->nome,0,20),
+            'opcao3_id' => substr($this->filaModel->getEscolasById($row->opcao3_id)->nome,0,20),
+            'opcao_matricula' => substr($this->filaModel->getEscolasById($row->opcao_matricula)->nome,0,40),
+            'opcao_turno' => $this->filaModel->getTurno($row->opcao_turno)
+              
+          );       
+        } 
+        $this->view('relatorios/relatorioaguardandoalfabetica',$data);
+  }  
+    
+
+
+
+
 
 
     

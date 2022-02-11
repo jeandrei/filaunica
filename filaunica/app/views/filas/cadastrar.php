@@ -299,7 +299,7 @@
                         <div class="form-row">
                             
                             <!-- NASCIMENTO -->
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-5">
                                 <label for="nascimento">
                                     <span class="obrigatorio">*</span>Data de nascimento
                                 </label>
@@ -318,7 +318,7 @@
                             <!-- NASCIMENTO -->
 
                             <!-- CERTIDÃO -->
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-7">
                                 <label for="certidao">
                                     Certidão de nascimento
                                 </label>

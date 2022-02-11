@@ -27,6 +27,7 @@
                           <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioMensal">Relatorio de Matrículas Mensal</a> 
                           <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioDemanda">Relatorio de Demanda por Unidade</a>                                                            
                           <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioAlunoEspecial">Relatorio de Alunos Especiais</a>
+                          <a class="dropdown-item" href="<?php echo URLROOT; ?>/admins/relatorioAguardandoAlfabetica">Relatorio Aguardando Alfabética</a>
                         </div>
                       </li>
                     

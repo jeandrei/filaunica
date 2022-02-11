@@ -488,6 +488,33 @@
             return $result;
         }
 
+
+        public function getAguardandoAlfabetica(){
+            $this->db->query('
+                            SELECT
+                                f.registro, 
+                                f.protocolo,
+                                f.responsavel, 
+                                f.telefone, 
+                                f.celular, 
+                                f.nomecrianca, 
+                                f.protocolo, 
+                                f.nascimento,
+                                f.opcao_turno, 
+                                f.opcao1_id,
+                                f.opcao2_id,
+                                f.opcao3_id
+                            FROM 
+                                fila f                                  
+                            WHERE 
+                                f.situacao_id = 1
+                            ORDER BY 
+                                f.nomecrianca ASC
+                            ');           
+            $result = $this->db->resultSet(); 
+            return $result;
+        }
+
        
 
         public function getDemandaEscola($escola_id){            
