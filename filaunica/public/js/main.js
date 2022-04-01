@@ -28,6 +28,7 @@ jQuery.validator.addMethod("cpf", function(value, element) {
 
 }, "CPF inválido");
 
+
 /* para usar a função de validação de email basta colocar na classe email */
 jQuery.validator.addMethod("email", 
     function(value, element) {
@@ -40,6 +41,7 @@ jQuery.validator.addMethod("email",
     }, 
     "Email inválido"
 );
+
 
 /* para usar a função de validação de celular basta colocar na classe validacelular */
 jQuery.validator.addMethod('validacelular', function (value, element) {
@@ -63,7 +65,7 @@ jQuery.validator.addMethod('validacelular', function (value, element) {
         return (this.optional(element) || false);
     }
     return (this.optional(element) || true);
-}, 'Celular válido!');
+}, 'Celular inválido!');
 
 
 
@@ -154,6 +156,7 @@ function CheckForm(id){
 	return checked;
 }
 
+
 function checkedRadioBtn(sGroupName)
     {   
         var group = document.getElementsByName(sGroupName);
@@ -217,10 +220,7 @@ $('.custom-file input').change(function (e) {
 	$(this).next('.custom-file-label').html(e.target.files[0].name);
 });
 
-function question(ask)
-{
-	return confirm (ask);
-}	
+
 
 //fileValidation(campo tipo field,id do span para apresentar o erro);"
 // onchange="return fileValidation('comprovante_residencia','res_erro');"

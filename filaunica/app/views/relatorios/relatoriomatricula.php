@@ -103,11 +103,7 @@ class PDF extends FPDF
                      $pdf->Ln();  
                      $pdf->Cell(95,10,utf8_decode("Usuário responsável pelo encaminhamento: "),1,0,'R');      
                      $pdf->Cell(100,10,utf8_decode($data["usuario"]),1,0,'L');
-                     
-                     
-
-                     
-                     $pdf->Ln(); 
+                        
                      $pdf->Ln();
                      $pdf->SetFont('Arial','',12);
                      $pdf->Cell(195,5,utf8_decode("Documentos para Matrícula: "),0,0,'L');
@@ -133,19 +129,33 @@ class PDF extends FPDF
                      $pdf->Cell(195,5,utf8_decode("-Para o aluno com deficiência, transtorno de espectro autista, altas habilidades ou superdotação,"),0,0,'L'); 
                      $pdf->Ln(); 
                      $pdf->Cell(195,5,utf8_decode("deverão apresentar laudo médico."),0,0,'L');
-
+                     $pdf->Ln(); 
+                     $pdf->Ln();                    
+                     $pdf->SetFont('Arial','B',12);  
+                     $pdf->Cell(195,5,utf8_decode("DECLARAÇÃO"),0,0,'C');
+                     $pdf->Ln(); 
+                     $pdf->SetFont('Arial','',12);  
+                     $pdf->Cell(195,5,utf8_decode("Declaro que as informações são verdadeiras e estou ciente de que a omissão de informações ou a"),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("apresentação de dados ou documentos falsos e/ou divergentes implicam em perda da matrícula no"),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("Plano de ampliação do período integral e em crime de falsidade ideológica, conforme Código Penal."),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("- Decreto-Lei nº 2.848, de 7 de dezembro de 1940. O crime de falsidade ideológica foi instituído"),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("no art. 299 do Código Penal e refere-se à omissão e alteração de documentos, públicos e privados,"),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("com o intuito de obter qualquer tipo de vantagem."),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode("Autorizo a visitação ao endereço para confirmar residência e domicílio."),0,0,'L');
+                     $pdf->Ln(); 
+                     $pdf->Cell(195,5,utf8_decode(""),0,0,'L');
                     
-                     $pdf->Ln(); 
-                     $pdf->Ln(); 
-                     $pdf->Ln(); 
+                                       
+                     
                      $pdf->Ln(); 
                      $pdf->Cell(195,5,utf8_decode("Observações: Este protocolo tem validade somente até o dia           /          /" . date("Y")),0,0,'L');
-                     $pdf->Ln();  
-                     $pdf->Ln(); 
-                     $pdf->Ln(); 
-                     $pdf->Ln(); 
-                     $pdf->Ln();  
-                     $pdf->Ln(); 
+                     $pdf->Ln();    
                      $pdf->Ln();  
                      $pdf->Cell(190,10,utf8_decode("________________________________________________ "),0,0,'C');  
                      $pdf->Ln();    
