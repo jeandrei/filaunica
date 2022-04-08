@@ -78,7 +78,7 @@
                                     value="<?php htmlout($data['responsavel']); ?>"
                                     onkeydown="upperCaseF(this)"                                            
                                 >
-                                    <span class="invalid-feedback">
+                                    <span class="text-danger">
                                         <?php echo $data['responsavel_err']; ?>
                                     </span>
                             </div>                            
@@ -100,7 +100,7 @@
                                     value="<?php htmlout($data['cpf']); ?>"
                                     maxlength="14"
                                 >
-                                    <span class="invalid-feedback">
+                                    <span class="text-danger">
                                         <?php echo $data['cpf_err']; ?>
                                     </span>
                             </div>
@@ -118,7 +118,7 @@
                                     class="form-control email <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['email']); ?>"
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['email_err']; ?>
                                 </span>
                             </div>
@@ -129,7 +129,7 @@
                         <!--CELULAR E TELEFONE FIXO-->
                         <div class="form-row">  
                             
-                            <!-- CELULAR -->
+                            <!-- CELULAR 1 -->
                             <div class="form-group col-md-6">
                                 <label for="celular">
                                     Celular
@@ -142,26 +142,26 @@
                                     class="form-control celular validacelular <?php echo (!empty($data['celular_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['celular']); ?>"
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['celular_err']; ?>
                                 </span>
                             </div>
                             <!-- CELULAR -->
 
-                            <!-- TELEFONE FIXO -->
+                            <!-- CELULAR 2 -->
                             <div class="form-group col-md-6">
                                 <label for="telefone">
-                                    Telefone Fixo
+                                    Celular 2
                                 </label>
                                 <input 
                                     type="text" 
                                     name="telefone" 
                                     id="telefone" 
                                     maxlength="15"
-                                    class="form-control telefone validatel<?php echo (!empty($data['telefone_err'])) ? 'is-invalid' : ''; ?>"
+                                    class="form-control celular validacelular<?php echo (!empty($data['telefone_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['telefone']); ?>"
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['telefone_err']; ?>
                                 </span>
                             </div>
@@ -193,7 +193,7 @@
                                             </option>
                                         <?php endforeach; ?>  
                                 </select>
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['bairro_err']; ?>
                                 </span>
                             </div>
@@ -212,7 +212,7 @@
                                     value="<?php htmlout($data['rua']); ?>"
                                     onkeydown="upperCaseF(this)" 
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['rua_err']; ?>
                                 </span>
                             </div>
@@ -237,7 +237,7 @@
                                     class="form-control onlynumbers <?php echo (!empty($data['number_err'])) ? 'is-invalid' : ''; ?>"                                                                                                                
                                     value="<?php htmlout($data['numero']); ?>"
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['rua_err']; ?>
                                 </span>
                             </div>
@@ -286,7 +286,7 @@
                                     value="<?php htmlout($data['nome']); ?>"
                                     onkeydown="upperCaseF(this)" 
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['nome_err']; ?>
                                 </span>
                             </div>
@@ -311,7 +311,7 @@
                                     value="<?php htmlout($data['nascimento']); ?>"
                                     maxlength="10"
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['nascimento_err']; ?>
                                 </span>
                             </div>
@@ -329,7 +329,7 @@
                                     class="form-control <?php echo (!empty($data['certidao_err'])) ? 'is-invalid' : ''; ?>"
                                     value="<?php htmlout($data['certidao']); ?>"
                                 >
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                     <?php echo $data['certidao_err']; ?>
                                 </span>
                             </div>
@@ -405,7 +405,7 @@
                                         </option>
                                     <?php endforeach; ?>  
                                 </select>                                           
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                         <?php echo $data['opcao1_err']; ?>
                                 </span>
                             </div>
@@ -433,7 +433,7 @@
                                         </option>
                                     <?php endforeach; ?>    
                                 </select>                                           
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                         <?php echo $data['opcao2_err']; ?>
                                 </span>
                             </div>
@@ -461,7 +461,7 @@
                                         </option>
                                     <?php endforeach; ?>    
                                 </select>                                           
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                         <?php echo $data['opcao2_err']; ?>
                                 </span>
                             </div>
@@ -485,7 +485,7 @@
                                     <option value="2" <?php echo $data['opcao_turno'] == '2' ? 'selected':'';?>>Vespertino</option>                                                                                                                   
                                             
                                 </select>                                           
-                                <span class="invalid-feedback">
+                                <span class="text-danger">
                                         <?php echo $data['opcao_turno_err'];?>
                                 </span>
                             </div>

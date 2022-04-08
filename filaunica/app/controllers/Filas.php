@@ -86,13 +86,13 @@
                     $data['responsavel_err'] = '' ;       
                 }
 
-                //valida telefone fixo                
+                //valida telefone fixo                 
                 if((!empty($data['telefone'])) && (!validatelefone($data['telefone']))){
                     $data['telefone_err'] = 'Telefone inválido';        
                 }else{
                     $data['telefone_err'] = '';
                 }
-                
+                                
                 //valida celular
                 if((!empty($data['celular'])) && (!validatelefone($data['celular']))){
                     $data['celular_err'] = 'Telefone inválido';        
