@@ -311,7 +311,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                             class="form-control"
                             value="<?php if(isset($registro['obs_admin'])){htmlout($registro['obs_admin']);} ?>"
                             onkeydown="upperCaseF(this)"   
-                            onkeyup="teste(this.id,this.value)"
+                            onkeyup="update(this.id,this.value)"
                         >
                         <span id="<?php echo $registro['id'];?>_msg">
                                 
@@ -359,7 +359,7 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
     constante waitTimer tem que ficar fora da função */
     let timer;
     const waitTimer = 3000;
-    function teste(id,data){    
+    function update(id,data){    
         clearTimeout(timer);    
         /* depois de 3 segundos executa a função */
         timer = setTimeout(function(){            
