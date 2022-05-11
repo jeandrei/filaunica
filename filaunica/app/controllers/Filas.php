@@ -149,7 +149,7 @@
                 }
 
                 //valida cpf
-                if((!empty($data['cpf'])) && (!validaCPF($data['cpf']))){
+                if((empty($data['cpf'])) || (!validaCPF($data['cpf']))){
                     $data['cpf_err'] = 'CPF inválido';  
                     
                 }else{

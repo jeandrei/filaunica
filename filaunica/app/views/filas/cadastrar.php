@@ -90,7 +90,7 @@
                             <!-- CPF -->
                             <div class="form-group col-md-4">
                                 <label for="cpf">
-                                        CPF
+                                    <span class="obrigatorio">*</span>CPF
                                 </label>
                                 <input 
                                     type="text" 
@@ -570,6 +570,9 @@
             },     
             opcao_turno : {
                 required : true                    
+            },
+            cpf : {
+                required : true
             }                
         },
 
@@ -595,6 +598,9 @@
             },     
             opcao_turno : {
                 required : 'Por favor informe o turno desejado'                    
+            },
+            cpf : {
+                required : 'CPF Inválido'
             }                            
         }
     });
