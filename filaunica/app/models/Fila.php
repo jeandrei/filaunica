@@ -599,6 +599,18 @@
             $count = $this->db->single();
             return $count;            
         }
+
+
+        public function gravaObsAdmin($id,$data){                    
+            $this->db->query('UPDATE fila SET fila.obs_admin = :obs_admin WHERE id=:id');
+            $this->db->bind(':id',$id); 
+            $this->db->bind(':obs_admin',$data);                        
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
         
     
     

@@ -109,7 +109,8 @@
                     'opcao_matricula' => $this->filaModel->getEscolasById($result['opcao_matricula'])->nome,
                     'opcao_turno' => $this->filaModel->getTurno($result['opcao_turno']),
                     'turno_matricula' => $this->filaModel->getTurno($result['turno_matricula']),
-                    'ultimo_historico' => $this->filaModel->getLastHistorico($result['id'])->historico
+                    'ultimo_historico' => $this->filaModel->getLastHistorico($result['id'])->historico,
+                    'obs_admin' => $result['obs_admin']
                   ];
                 }
               } else {
@@ -157,7 +158,7 @@
             //die(var_dump($data_r));
             $this->view('relatorios/relatorioconsulta' ,$data_r);
           } else {
-              // SE NÃO FOR IMPRIMIR CHAMO O INDEX COM OS DADOS NOVAMENTE
+              // SE NÃO FOR IMPRIMIR CHAMO O INDEX COM OS DADOS NOVAMENTE              
               $this->view('admins/index', $data);
           }
            
@@ -469,6 +470,37 @@
         $this->view('relatorios/relatorioaguardandoalfabetica',$data);
   }  
     
+
+  public function gravaobsadmin(){
+    $id = $_POST['id'];
+    $data= $_POST['data']; 
+
+    //Se não teve nenhum erro grava os dados
+    try{
+
+      if($this->filaModel->gravaObsAdmin($id,$data)){
+          //para acessar esses valores no jquery
+          //exemplo responseObj.message
+          $json_ret = array(
+                              'classe'=>'text-success', 
+                              'message'=>'Dados gravados com sucesso',
+                              'error'=>false
+                          );                     
+          
+          echo json_encode($json_ret); 
+      } else {
+        throw new Exception('Ops! Algo deu errado ao tentar gravar os dados!');
+      }    
+    } catch (Exception $e) {
+      $erro = 'Erro: '.  $e->getMessage(). "\n";
+      $json_ret = array(
+              'classe'=>'text-danger', 
+              'message'=>$erro,
+              'error'=>true
+              );                     
+      echo json_encode($json_ret); 
+    }
+  }
 
 
 

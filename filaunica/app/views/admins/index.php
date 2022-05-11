@@ -293,7 +293,30 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 <hr>
 
                 <div class="row">
-                    <div class="col-sm-12">Última informação do histórico: <?php echo $registro['ultimo_historico']; ?></div>
+                    <div class="col-6">
+                        <div class="col-sm-12">Última informação do histórico: <?php echo $registro['ultimo_historico']; ?></div>
+                    </div>
+                    <div class="col-1">
+                        <label for="observacao">
+                            Observação:
+                        </label>
+                    </div>
+                    <div class="col-5">   
+                        
+                        <input 
+                            type="text" 
+                            name="observacao" 
+                            id="<?php echo $registro['id'];?>" 
+                            maxlength="50"
+                            class="form-control"
+                            value="<?php if(isset($registro['obs_admin'])){htmlout($registro['obs_admin']);} ?>"
+                            onkeydown="upperCaseF(this)"   
+                            onkeyup="teste(this.id,this.value)"
+                        >
+                        <span id="<?php echo $registro['id'];?>_msg">
+                                
+                        </span>
+                    </div>
                 </div>
                 
                 
@@ -330,4 +353,36 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
 <!-- AQUI NÃO COLOCO O FOOTER DO INC POIS PRECISO FECHAR O div do container antes da tabela -->  
 </body>
 </html>
+
+<script>
+    /* script executa a cada 3 segundos a variavel timer e a 
+    constante waitTimer tem que ficar fora da função */
+    let timer;
+    const waitTimer = 3000;
+    function teste(id,data){    
+        clearTimeout(timer);    
+        /* depois de 3 segundos executa a função */
+        timer = setTimeout(function(){            
+            $(document).ready(function() { 
+                $.ajax({
+                    url: '<?php echo URLROOT; ?>/admins/gravaobsadmin',
+                    method:'POST', 
+                    data:{
+                        id:id,
+                        data:data
+                    },
+                    success: function(retorno_php){
+                        var responseObj = JSON.parse(retorno_php);                       
+                        $("#"+id+"_msg")
+                        .removeClass()
+                        .addClass(responseObj.classe) 
+                        .html(responseObj.message) 
+                        .fadeIn(2000).fadeOut(4000);
+                       
+                    }//sucess
+                });//Fecha o ajax       
+            });//Fecha document ready function
+        }, waitTimer);
+    }
+</script>
 
