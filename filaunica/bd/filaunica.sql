@@ -158,6 +158,7 @@ CREATE TABLE `fila` (
   `opcao_turno` varchar(20) DEFAULT NULL,
   `turno_matricula` varchar(20) DEFAULT NULL,  
   `observacao` varchar(255) DEFAULT NULL,
+  `obs_admin` varchar(255) DEFAULT NULL,
   `cpfresponsavel` varchar(15) DEFAULT NULL,
   `protocolo` varchar(255) DEFAULT NULL,  
   `situacao_id` int(11) DEFAULT 1
