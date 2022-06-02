@@ -79,20 +79,20 @@ services:
   
   #criamos mais um container para o phpmyadmin
   phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        #permite acesso ao container db
-        links: 
-            - db:db
-        container_name: phpmyadmin 
-        ports:
-        #acessa no container atraves da prta 8000
-            - 8000:80
-        environment:
+    image: phpmyadmin/phpmyadmin
+    #permite acesso ao container db
+    links: 
+    - db:db
+    container_name: phpmyadmin 
+    ports:
+    #acessa no container atraves da prta 8000
+    - 8000:80
+    environment:
         #dados de conexão com o banco de dados db
-            MYSQL_USER: spuser
-            MYSQL_PASSWORD: mypassword
-            MYSQL_ROOT_PASSWORD: rootadm
-            restart: always
+        MYSQL_USER: spuser
+        MYSQL_PASSWORD: mypassword
+        MYSQL_ROOT_PASSWORD: rootadm
+    restart: always
 volumes:
     dumps:
     

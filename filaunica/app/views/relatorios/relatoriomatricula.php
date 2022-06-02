@@ -96,7 +96,15 @@ class PDF extends FPDF
 
 
                      $pdf->Ln();  
-                     $pdf->Cell(45,10,utf8_decode("Aluno especial: "),1,0,'R');      
+                     $pdf->Cell(45,10,utf8_decode("Recebeu da SEDUC: "),1,0,'R'); 
+                     
+                     $pdf->Cell(150,10,utf8_decode('(   ) Uniforme (   ) Mochila  (   ) Agenda Escolar'),1,0,'L');
+
+                     
+                     
+                     $pdf->Ln();  
+                     $pdf->Cell(45,10,utf8_decode("Aluno especial: "),1,0,'R');   
+                     
                      $pdf->Cell(150,10,utf8_decode($data["deficiencia"]),1,0,'L');
                      
                      
@@ -130,11 +138,11 @@ class PDF extends FPDF
                      $pdf->Ln(); 
                      $pdf->Cell(195,5,utf8_decode("deverão apresentar laudo médico."),0,0,'L');
                      $pdf->Ln(); 
-                     $pdf->Ln();                    
-                     $pdf->SetFont('Arial','B',12);  
+                                       
+                     $pdf->SetFont('Arial','B',10);  
                      $pdf->Cell(195,5,utf8_decode("DECLARAÇÃO"),0,0,'C');
                      $pdf->Ln(); 
-                     $pdf->SetFont('Arial','',12);  
+                     $pdf->SetFont('Arial','',10);  
                      $pdf->Cell(195,5,utf8_decode("Declaro que as informações são verdadeiras e estou ciente de que a omissão de informações ou a"),0,0,'L');
                      $pdf->Ln(); 
                      $pdf->Cell(195,5,utf8_decode("apresentação de dados ou documentos falsos e/ou divergentes implicam em perda da matrícula no"),0,0,'L');
@@ -155,7 +163,7 @@ class PDF extends FPDF
                      
                      $pdf->Ln(); 
                      $pdf->Cell(195,5,utf8_decode("Observações: Este protocolo tem validade somente até o dia           /          /" . date("Y")),0,0,'L');
-                     $pdf->Ln();    
+                       
                      $pdf->Ln();  
                      $pdf->Cell(190,10,utf8_decode("________________________________________________ "),0,0,'C');  
                      $pdf->Ln();    
