@@ -385,8 +385,7 @@
         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
         //quando for para relatório usar getFilaBusca($relatorio=true,$page=NULL,$options)
         public function getFilaBusca($relatorio,$page,$options){
-                      
-
+                                  
             $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
             
 

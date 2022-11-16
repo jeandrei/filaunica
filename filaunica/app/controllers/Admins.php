@@ -26,7 +26,7 @@
               $page = 1;
           }                
                             
-           $options = array(
+            $options = array(
               'results_per_page' => 10,
               'url' => URLROOT . '/admins/index.php?page=*VAR*&protocolo=' . $_GET['protocolo'] . '&situacao_id=' . $_GET['situacao_id'] . '&etapa_id=' . $_GET['etapa_id'] . '&escola_id=' . $_GET['escola_id'] . '&nome=' . $_GET['nome'],
               'named_params' => array(
@@ -36,7 +36,7 @@
                                       ':escola_id' => $_GET['escola_id'],
                                       ':nome' => $_GET['nome']
                                      )     
-          );
+          );          
  
           
                   
