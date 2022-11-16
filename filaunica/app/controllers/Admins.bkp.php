@@ -19,26 +19,64 @@
            if(isset($_GET['page']))
           {
               //ENTRA AQUI SE FOR CLICADO PELO LINK DA PAGINAÇÃO
-              $page = $_GET['page'];                 
+              $page = $_GET['page'];   
+              
+              // $_GET['status'] VEM LÁ DO LINK DA PAGINAÇÃO
+              $situacao_id = $_GET['situacao_id'];
+              // SE ENTROU AQUI É PQ FOI CLICADO NO LINK DA PAGINAÇÃO ENTÃO PARA MANTER O VALOR ATUAL DA BUSCA PASSO O VALOR DO GET PARA O POST
+              $_POST['buscasituacao'] = $situacao_id;
+              
+              $escola_id = $_GET['escola_id'];
+              $_POST['buscaescola'] = $escola_id;
+               
+              // etapa_id vem lá do get &etapa_id
+               $etapa_id = $_GET['etapa_id'];               
+               $_POST['buscaetapa'] =  $etapa_id;
+
+               $nome =$_GET['nome'];
+               $_POST['buscanome'] =  $nome;
+              
           }
           else
-          {        
+          {                
+              // SE ENTROU AQUI É QUE FOI CARREGADO A PÁGINA PELA PRIMEIRA VEZ OU FOI CLICADO EM ATUALIZAR
+              // LOGO SE TENHO ALGUM VALOR NO POST DE BUSCA PASSO PARA A VARIÁVEL STATUS E POR FIM SE AINDA ASSIM 
+              //A VARIÁVEL ESTIVER VAZIA PASSO O VALOR PADRÃO 'Todos'
+              $situacao_id = $_POST['buscasituacao'];
+              if(!isset($situacao_id)){                
+                  $situacao_id = 'Todos';
+              }
+
+              $etapa_id = $_POST['buscaetapa'];
+              if(!isset($etapa_id)){                
+                $etapa_id = 'Todos';
+              }  
+            
+              $escola_id = $_POST['buscaescola'];
+              if(!isset($escola_id)){                
+                $escola_id = 'Todos';
+              } 
+
+              $nome = $_POST['buscanome'];
+              $protocolo = $_POST['buscaprotocolo'];
+
               $page = 1;
-          }                
-                            
-           $options = array(
+          }      
+                          
+        
+          
+          $options = array(
               'results_per_page' => 10,
-              'url' => URLROOT . '/admins/index.php?page=*VAR*&protocolo=' . $_GET['protocolo'] . '&situacao_id=' . $_GET['situacao_id'] . '&etapa_id=' . $_GET['etapa_id'] . '&escola_id=' . $_GET['escola_id'] . '&nome=' . $_GET['nome'],
+              'url' => URLROOT . '/admins/index.php?page=*VAR*&protocolo=' . $protocolo . '&situacao_id=' . $situacao_id . '&etapa_id=' . $etapa_id . '&escola_id=' . $escola_id . '&nome=' . $nome,
               'named_params' => array(
-                                      ':protocolo' => $_GET['protocolo'],
-                                      ':situacao_id' => $_GET['situacao_id'],
-                                      ':etapa_id' => $_GET['etapa_id'],
-                                      ':escola_id' => $_GET['escola_id'],
-                                      ':nome' => $_GET['nome']
+                                      ':protocolo' => $protocolo,
+                                      ':situacao_id' => $situacao_id,
+                                      ':etapa_id' => $etapa_id,
+                                      ':escola_id' => $escola_id,
+                                      ':nome' => $nome
                                      )     
           );
- 
-          
+        
                   
           $paginate = $this->filaModel->getFilaBusca($relatorio=false, $page, $options);
 
@@ -84,7 +122,7 @@
          
           
           //SE O BOTÃO CLICADO FOR O IMPRIMIR EU CHAMO A FUNÇÃO getDados($page, $options,1) ONDE 1 É QUE É PARA IMPRIMIR E 0 É PARA LISTAR NA PAGINAÇÃO
-          if($_GET['botao'] == "Imprimir"){              
+          if($_POST['botao'] == "Imprimir"){              
               
             //$result_r = $this->filaModel->getFilaBuscaRelatorio($options);
             $result_r = $this->filaModel->getFilaBusca($relatorio=true, $page=NULL, $options);

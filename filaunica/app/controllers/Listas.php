@@ -12,7 +12,11 @@
         }
 
         public function listachamada(){
-            //$this->view('listas/listachamada');
+            
+            if((!isLoggedIn())){ 
+                redirect('users/login');
+            } 
+            
             $this->view('listas/listachamada');
         }
 

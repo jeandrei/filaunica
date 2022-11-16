@@ -6,6 +6,8 @@
 
 //$situacoes = $this->situacaoModel->getSituacoes(); 
 //die(var_dump($situacoes));
+//var_dump($_GET);
+
 
 
 ?>
@@ -14,17 +16,17 @@
 
 <script>
     
-    function limpar(){
-        document.getElementById('buscanome').value = "";
-        document.getElementById('buscaprotocolo').value = "";
-        document.getElementById('buscaetapa').value = "Todos";
-        document.getElementById('buscasituacao').value = "Todos";
-        document.getElementById('buscaescola').value = "Todos";        
-        focofield("buscanome");
+    function limpar(){        
+        document.getElementById('nome').value = "";
+        document.getElementById('protocolo').value = "";        
+        document.getElementById('etapa_id').value = "Todos";
+        document.getElementById('situacao_id').value = "Todos";
+        document.getElementById('escola_id').value = "Todos";        
+        focofield("nome");
     }    
     
     window.onload = function(){
-        focofield("buscanome");
+        focofield("nome");
     }     
 
         
@@ -43,23 +45,23 @@
 
 
 <!-- FORMULÁRIO COM OS CAMPOS DE PESQUISA -->
-<form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="post" enctype="multipart/form-data">
+<form id="filtrar" action="<?php echo URLROOT; ?>/admins/index" method="GET" enctype="multipart/form-data">
 
     <!-- 1ª LINHA E COLUNAS PARA OS CAMPOS DE BUSCA -->
     <div class="row mb-2">
         
         <!-- COLUNA 1 PROTOCOLO-->
         <div class="col-md-2">
-            <label for="buscaprotocolo">
+            <label for="protocolo">
                 Buscar Protocolo
             </label>
             <input 
                 type="number" 
-                name="buscaprotocolo" 
-                id="buscaprotocolo" 
+                name="protocolo" 
+                id="protocolo" 
                 maxlength="60"
                 class="form-control"
-                value="<?php if(isset($_POST['buscaprotocolo'])){htmlout($_POST['buscaprotocolo']);} ?>"
+                value="<?php if(isset($_GET['protocolo'])){htmlout($_GET['protocolo']);} ?>"
                 onkeydown="upperCaseF(this)"   
                 ><span class="invalid-feedback">
                     <?php // echo $data['nome_err']; ?>
@@ -69,16 +71,16 @@
         
         <!-- COLUNA 2 NOME-->
         <div class="col-md-3">
-            <label for="buscanome">
+            <label for="nome">
                 Buscar por Nome
             </label>
             <input 
                 type="text" 
-                name="buscanome" 
-                id="buscanome" 
+                name="nome" 
+                id="nome" 
                 maxlength="60"
                 class="form-control"
-                value="<?php if(isset($_POST['buscanome'])){htmlout($_POST['buscanome']);} ?>"
+                value="<?php if(isset($_GET['nome'])){htmlout($_GET['nome']);} ?>"
                 onkeydown="upperCaseF(this)"   
                 ><span class="invalid-feedback">
                     <?php // echo $data['nome_err']; ?>
@@ -88,13 +90,13 @@
 
         <!-- COLUNA 3 ETAPA -->
         <div class="col-md-3">
-            <label for="buscaetapa">
+            <label for="etapa_id">
                 Busca por Etapa
             </label>                               
             <!-- 1 BOTÃO BUSCA POR ETAPA VAI JOGAR PARA controlers/Admins.php-->
             <select 
-                name="buscaetapa" 
-                id="buscaetapa" 
+                name="etapa_id" 
+                id="etapa_id" 
                 class="form-control"                                        
             >
                     <option value="Todos">Todos</option>
@@ -102,8 +104,8 @@
                     $etapas = $this->etapaModel->getEtapas();                     
                     foreach($etapas as $etapa) : ?> 
                         <option value="<?php echo $etapa['id']; ?>"
-                                    <?php if(isset($_POST['buscaetapa'])){
-                                    echo $_POST['buscaetapa'] == $etapa['id'] ? 'selected':'';
+                                    <?php if(isset($_GET['etapa_id'])){
+                                    echo $_GET['etapa_id'] == $etapa['id'] ? 'selected':'';
                                     }
                                     ?>
                         >
@@ -116,12 +118,12 @@
         
         <!-- COLUNA 3 ESCOLA -->
         <div class="col-md-4">
-            <label for="buscaescola">
+            <label for="escola_id">
                 Busca por Escola
             </label>                               
             <select 
-                name="buscaescola" 
-                id="buscaescola" 
+                name="escola_id" 
+                id="escola_id" 
                 class="form-control"                                        
             >
                     <option value="Todos">Todos</option>
@@ -129,8 +131,8 @@
                     $escolas = $this->filaModel->getEscolas();                    
                     foreach($escolas as $escola) : ?> 
                         <option value="<?php echo $escola->id; ?>"
-                                    <?php if(isset($_POST['buscaescola'])){
-                                    echo $_POST['buscaescola'] == $escola->id ? 'selected':'';
+                                    <?php if(isset($_GET['escola_id'])){
+                                    echo $_GET['escola_id'] == $escola->id ? 'selected':'';
                                     }
                                     ?>
                         >
@@ -149,23 +151,23 @@
         
         <!-- COLUNA 1 SITUAÇÃO-->
         <div class="col-md-3">
-            <label for="buscasituacao">
+            <label for="situacao_id">
                 Busca por Status
             </label>             
 
             <select 
-                name="buscasituacao" 
-                id="buscasituacao" 
+                name="situacao_id" 
+                id="situacao_id" 
                 class="form-control"                                        
             >
                     <option value="Todos">Todos</option>
-                    <option value="FE" <?php echo $_POST['buscasituacao'] == 'FE' ? 'selected':'';?>>Fora de Todas as Etapas</option>
+                    <option value="FE" <?php echo $_GET['situacao_id'] == 'FE' ? 'selected':'';?>>Fora de Todas as Etapas</option>
                     <?php 
                     $situacoes = $this->situacaoModel->getSituacoes();                       
                     foreach($situacoes as $row) : ?> 
                         <option value="<?php echo $row->id; ?>"
-                                    <?php if(isset($_POST['buscasituacao'])){
-                                    echo $_POST['buscasituacao'] == $row->id ? 'selected':'';
+                                    <?php if(isset($_GET['situacao_id'])){
+                                    echo $_GET['situacao_id'] == $row->id ? 'selected':'';
                                     }
                                     ?>
                         >

@@ -34,7 +34,7 @@
 
 
 <!-- IMAGEM HEADER -->
-<div class="container"><span style="float:right;"><a href="<?php echo URLROOT; ?>/users/login">Área restrita</a></span></div>
+
 <div class="container">  
 <img src="<?php echo URLROOT; ?>/img/LOGO.png" class="img-fluid" alt="Responsive image">
 

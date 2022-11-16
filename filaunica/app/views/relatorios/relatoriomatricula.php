@@ -22,7 +22,7 @@ class PDF extends FPDF
                 $this->Ln(20);
                 // Move to the right
                 $this->Cell(80);                
-                $this->Cell(30,10, utf8_decode("PROTOCOLO DE VAGA PARA EDUCAÇÃO INFANTIL - " . date("Y")),0,0,'C');
+                $this->Cell(30,10, utf8_decode("PROTOCOLO DE VAGA PARA EDUCAÇÃO INFANTIL"),0,0,'C');
                 // Line break
                 $this->Ln(10);                
             }

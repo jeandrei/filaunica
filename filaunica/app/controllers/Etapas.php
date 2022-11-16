@@ -7,6 +7,10 @@
 
         public function index() { 
             
+            if((!isLoggedIn())){ 
+                redirect('index');
+            }  
+
             if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                 redirect('index');
             } 
@@ -19,7 +23,11 @@
             }   
         }
 
-        public function new(){      
+        public function new(){  
+            
+            if((!isLoggedIn())){ 
+                redirect('users/login');
+            }  
            
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -119,7 +127,12 @@
         }
 
        
-        public function edit($id){ 
+        public function edit($id){
+            
+            if((!isLoggedIn())){ 
+                redirect('users/login');
+            } 
+            
             // Check for POST            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){  
                             
@@ -224,6 +237,10 @@
 
 
         public function delete($id){ 
+
+            if((!isLoggedIn())){ 
+                redirect('users/login');
+            } 
            
             if($_SESSION[DB_NAME . '_user_type'] != "admin"){
                 redirect('index');

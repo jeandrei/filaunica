@@ -384,8 +384,9 @@
 
         //FUNÇÃO QUE EXECUTA A SQL PAGINATE
         //quando for para relatório usar getFilaBusca($relatorio=true,$page=NULL,$options)
-        public function getFilaBusca($relatorio,$page,$options){   
-            
+        public function getFilaBusca($relatorio,$page,$options){
+                      
+
             $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila";           
             
 
@@ -394,7 +395,11 @@
                 $sql .= " WHERE fila.situacao_id = 1 AND (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) IS NULL";
             }
             // SE A ETAPA É IGUAL A TODOS EU CLOCO O COMANDO WHERE FILA.ID QUE TRAZ TODOS OS REGISTROS
-            elseif(($options['named_params'][':etapa_id']) == "Todos"){                    
+            elseif( 
+                (($options['named_params'][':etapa_id']) === "Todos")||(($options['named_params'][':etapa_id']) === NULL) ||
+                (($options['named_params'][':etapa_id']) === "")
+                )
+            {   
                 $sql .= " WHERE fila.id";
             } else {
                 // SE FOR DIFERENTE DE TODOS QUER DIZER QUE O USUÁRIOS SELECIONOU ALGUM OUTRO VALOR DAÍ EU MONTO A SQL
@@ -407,7 +412,10 @@
             }
           
 
-            if((($options['named_params'][':situacao_id']) <> "Todos") && (($options['named_params'][':situacao_id']) <> "FE")){
+            if(
+                (($options['named_params'][':situacao_id']) <> "Todos") && 
+                (($options['named_params'][':situacao_id']) <> NULL) && (($options['named_params'][':situacao_id']) <> "FE"))
+            {
                 $sql .= " AND situacao_id = " . "'" . $options['named_params'][':situacao_id'] ."'";
             }    
             
@@ -426,7 +434,7 @@
             if(($options['named_params'][':protocolo']) <> ""){
                 $sql = "SELECT *,  (SELECT descricao FROM etapa WHERE fila.nascimento>=data_ini AND fila.nascimento<=data_fin) as etapa FROM fila WHERE protocolo = " . $options['named_params'][':protocolo'];                      
             }
-            //die(var_dump($sql));
+            //var_dump($sql);
             
 
             if($relatorio == false){

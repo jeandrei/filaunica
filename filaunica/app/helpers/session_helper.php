@@ -28,4 +28,13 @@
     }
 
 
+    function isLoggedIn(){
+        if(isset($_SESSION[DB_NAME . '_user_id'])){       
+           return true;
+        } else {
+            return false;
+        }
+    }
+
+
 ?>

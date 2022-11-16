@@ -6,8 +6,8 @@
             $this->etapaModel = $this->model('Etapa');
         }
 
-        public function cadastrar(){
-          
+        public function cadastrar(){         
+           
             
             //apagar as duas linhas abaixo coloquei aqui só para montar o formulário
            // $this->view('filas/sucessoCadastrar', $data = 0);
@@ -291,6 +291,11 @@
         }
 
         public function consultar(){
+
+            if((!isLoggedIn())){ 
+                redirect('users/login');
+            } 
+
             // aqui pego os dados do protocolo
             // se existir o protocolo chamo o formulário de consulta se não chamo o cadastrar novamente
             if($this->filaModel->buscaProtocolo($_POST['protocolo']))
@@ -320,6 +325,11 @@
         }
 
         public function listachamada(){
+
+            if((!isLoggedIn())){ 
+                redirect('users/login');
+            } 
+
             $data['etapas'] = $this->filaModel->getEtapas();           
             $this->view('filas/listachamada', $data);
 
