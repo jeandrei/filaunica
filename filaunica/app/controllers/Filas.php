@@ -128,8 +128,8 @@
                     $data['nascimento_err'] = '';
                 }    
 
-                /* ESSA PARTE TIREI PARA PERMITIR INSCRIÇÕES COM MENOS DE 4 MESES
-                //valida etapa
+                
+                //SÓ PERMITE INSCRIÇÃO DE COM IDADE DENTRO DE ALGUMA ETAPA
                 if(!empty($data['nascimento'])){
                     if($this->etapaModel->getEtapa($data['nascimento'])){
                         $data['etapa_id'] = $this->etapaModel->getEtapa($data['nascimento']);
@@ -139,7 +139,7 @@
                         flash('fila-erro','Ops! A data de nascimento não corresponde a nenhuma etapa da Fila Única','alert alert-danger');                        
                     }
                 }
-                */
+                
 
                 //valida email
                 if((!empty($data['email'])) && (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))){
@@ -233,7 +233,8 @@
                 $data['desc_etapa'] = $this->etapaModel->getDescricaoEtapa($id_etapa);
 
                 // chamo o formulário de sucesso
-                $this->view('filas/sucessoCadastrar', $data);
+                //$this->view('filas/sucessoCadastrar', $data);
+                $this->view('relatorios/protocolo', $data);
 
                 
                 

@@ -184,4 +184,9 @@ function CalculaIdade($data){
   
 }
 
+function formatadata($data){  
+    $result = date('d/m/Y', strtotime($data));    
+    return $result;
+  }
+
 ?>
