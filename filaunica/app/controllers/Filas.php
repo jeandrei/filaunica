@@ -292,10 +292,7 @@
         }
 
         public function consultar(){
-
-            if((!isLoggedIn())){ 
-                redirect('users/login');
-            } 
+             
 
             // aqui pego os dados do protocolo
             // se existir o protocolo chamo o formulário de consulta se não chamo o cadastrar novamente
