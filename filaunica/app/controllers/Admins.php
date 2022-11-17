@@ -73,7 +73,8 @@
                     'opcao_turno' => $this->filaModel->getTurno($result['opcao_turno']),
                     'turno_matricula' => $this->filaModel->getTurno($result['turno_matricula']),
                     'ultimo_historico' => $this->filaModel->getLastHistorico($result['id'])->historico,
-                    'obs_admin' => $result['obs_admin']
+                    'obs_admin' => $result['obs_admin'],
+                    'deficiencia' => (($result['deficiencia'] == 0)?'NÃO':'SIM')
                   ];
                 }
               } else {

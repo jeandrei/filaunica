@@ -320,15 +320,18 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 <div class="col-sm-4">
                     <b>Idade:</b> <?php echo CalculaIdade($registro['nascimento']);?>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <b>Etapa:</b> <?php echo $registro['etapa']; ?>
+                </div> 
+                <div class="col-sm-2">
+                    <b>Especial:</b> <?php echo $registro['deficiencia']; ?>
                 </div>  
             </div>   
             <div class="row">
                 <div class="col-sm-6">
                     <b>Responsável:</b> <?php echo $registro['responsavel']; ?>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <b>Telefone:</b> <?php echo $registro['telefone']; ?>
                 </div> 
                 <div class="col-sm-3">

@@ -470,6 +470,9 @@
                         
 
                         <!-- TURNO DESEJADO -->
+                        <div class="alert alert-info" role="alert">
+                            <p>Para o turno <strong>INTEGRAL</strong> o processo de inscrição é realizado somente na <strong>Secretaria de Educação.</strong></p>
+                        </div>
                         <div class="form-row">    
                             <div class="form-group col-md-12">
                                 <label for="opcao_turno" class="help-block">
