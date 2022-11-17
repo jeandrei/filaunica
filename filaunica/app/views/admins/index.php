@@ -308,16 +308,22 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
         <div class="faq-text">
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-3">
                     <b>Registro:</b> <?php echo $registro['registro']; ?>
-                </div>                  
+                </div>     
+                <div class="col-5">
+                    <b>Logradouro:</b> <?php echo $registro['logradouro']; ?>
+                </div>
+                <div class="col-3">
+                    <b>Bairro:</b> <?php echo $registro['bairro']; ?>
+                </div>                
             </div>  
 
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <b>Nascimento:</b> <?php echo $registro['nascimento']; ?>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <b>Idade:</b> <?php echo CalculaIdade($registro['nascimento']);?>
                 </div>
                 <div class="col-sm-2">
