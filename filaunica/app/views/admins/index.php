@@ -24,7 +24,7 @@ h1 {
   background-color: transparent;
   border: 1px solid #9fa4a8;
   border-radius: 10px;
-  margin: 20px 0;
+  margin: 5px 0;
   padding: 30px;
   position: relative;
   overflow: hidden;
@@ -340,9 +340,12 @@ if($data['results'] == false){ die('<div class="container alert alert-warning">S
                 <div class="col-sm-2">
                     <b>Telefone:</b> <?php echo $registro['telefone']; ?>
                 </div> 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <b>Celular:</b> <?php echo $registro['celular']; ?>
                 </div>  
+                <div class="col-sm-2">
+                    <b>Turno:</b> <?php echo $registro['opcao_turno']; ?>
+                </div> 
             </div>  
             <div class="row">
                 <div class="col-sm-4">
