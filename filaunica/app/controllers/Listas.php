@@ -11,11 +11,7 @@
             $this->situacaoModel = $this->model('Situacao');
         }
 
-        public function listachamada(){
-            
-            if((!isLoggedIn())){ 
-                redirect('users/login');
-            } 
+        public function listachamada(){      
             
             $this->view('listas/listachamada');
         }
